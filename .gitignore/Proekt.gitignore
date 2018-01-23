@@ -1,0 +1,349 @@
+public class LevelOfDamage {
+    public String[] damage ={"Малый ущерб", "Умеренный ущерб", "Ущерб средней тяжести", "Большой ущерб", "Критический ущерб"};
+}
+
+public class LevelOfProbabilityOfAttack {
+    public String[] probability ={"Очень низкий", "Низкий", "Средний", "Высокий", "Очень высокий"};
+}
+
+public class RiskLevelOfInformationSecurity {
+    public String risk (String a, String b){
+        String c = null;
+        if ((a=="Малый ущерб")& (b=="Очень низкий")) c="Низкий риск";
+        if ((a=="Малый ущерб")& (b=="Низкий")) c="Низкий риск";
+        if ((a=="Малый ущерб")& (b=="Средний")) c="Низкий риск";
+        if ((a=="Малый ущерб")& (b=="Высокий")) c="Средний риск";
+        if ((a=="Малый ущерб")& (b=="Очень высокий")) c="Средний риск";
+        if ((a=="Умеренный ущерб")& (b=="Очень низкий")) c="Низкий риск";
+        if ((a=="Умеренный ущерб")& (b=="Низкий")) c="Низкий риск";
+        if ((a=="Умеренный ущерб")& (b=="Средний")) c="Средний риск";
+        if ((a=="Умеренный ущерб")& (b=="Высокий")) c="Средний риск";
+        if ((a=="Умеренный ущерб")& (b=="Очень высокий")) c="Высокий риск";
+        if ((a=="Ущерб средней тяжести")& (b=="Очень низкий")) c="Низкий риск";
+        if ((a=="Ущерб средней тяжести")& (b=="Низкий")) c="Средний риск";
+        if ((a=="Ущерб средней тяжести")& (b=="Средний")) c="Средний риск";
+        if ((a=="Ущерб средней тяжести")& (b=="Высокий")) c="Средний риск";
+        if ((a=="Ущерб средней тяжести")& (b=="Очень высокий")) c="Высокий риск";
+        if ((a=="Большой ущерб")& (b=="Очень низкий")) c="Средний риск";
+        if ((a=="Большой ущерб")& (b=="Низкий")) c="Средний риск";
+        if ((a=="Большой ущерб")& (b=="Средний")) c="Средний риск";
+        if ((a=="Большой ущерб")& (b=="Высокий")) c="Средний риск";
+        if ((a=="Большой ущерб")& (b=="Очень высокий")) c="Высокий риск";
+        if ((a=="Критический ущерб")& (b=="Очень низкий")) c="Средний риск";
+        if ((a=="Критический ущерб")& (b=="Низкий")) c="Высокий риск";
+        if ((a=="Критический ущерб")& (b=="Средний")) c="Высокий риск";
+        if ((a=="Критический ущерб")& (b=="Высокий")) c="Высокий риск";
+        if ((a=="Критический ущерб")& (b=="Очень высокий")) c="Высокий риск";
+        return c;
+    }
+}
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+public class Proekt extends JFrame{
+    LevelOfDamage D = new LevelOfDamage();
+    LevelOfProbabilityOfAttack P = new LevelOfProbabilityOfAttack();
+    private JLabel L1 = new JLabel("Уровень ущерба:");
+    private JList List1 = new JList(D.damage);
+    private JLabel L2 = new JLabel("Уровень вероятности атаки:");
+    private JList List2 = new JList(P.probability);
+    private JButton button = new JButton("Вычислить уровень риска ИБ ");
+    private JLabel L3 = new JLabel("Уровень риска ИБ:");
+    private JTextField Text = new JTextField("", 5);
+    private JLabel L4 = new JLabel("");
+    public Proekt() {
+        super("Качественная оценка рисков ИБ");
+        this.setBounds(100, 100, 700, 350);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Container container = this.getContentPane();
+        container.setLayout(new GridLayout(3, 3, 2, 2));
+        container.add(L1);
+        container.add(L2);
+        container.add(L3);
+        container.add(List1);
+        container.add(List2);
+        container.add(Text);
+        container.add(L4);
+        button.addActionListener(new B2EventListener());
+        container.add(button);
+    }
+    class B2EventListener implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            RiskLevelOfInformationSecurity q = new RiskLevelOfInformationSecurity();
+            Text.setText(q.risk((String) List1.getSelectedValue(), (String) List2.getSelectedValue()));
+        }
+    }
+    public static void main(String[] args) {
+        Proekt app = new Proekt();
+        app.setVisible(true);
+    }
+}
+
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Before;
+public class RiskLevelOfInformationSecurityTest {
+    public RiskLevelOfInformationSecurityTest(){
+    }
+    @Before
+    public void setUp() {
+    }
+    @After
+    public void tearDown() {
+    }
+    @Test
+
+    public void testTest1() {
+
+        RiskLevelOfInformationSecurity Test= new RiskLevelOfInformationSecurity();
+
+        String a = "Малый ущерб";
+
+        String b = "Очень низкий";
+
+        String c = "Низкий риск";
+
+        boolean expResult = true;
+
+        boolean result = false;
+
+        String x =Test.risk(a,b);
+
+        if (c==x) result=true;
+
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+
+    public void testTest2() {
+
+        RiskLevelOfInformationSecurity Test= new RiskLevelOfInformationSecurity();
+
+        String a = "Малый ущерб";
+
+        String b = "Средний";
+
+        String c = "Низкий риск";
+
+        boolean expResult = true;
+
+        boolean result = false;
+
+        String x =Test.risk(a,b);
+
+        if (c==x) result=true;
+
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+
+    public void testTest3() {
+
+        RiskLevelOfInformationSecurity Test= new RiskLevelOfInformationSecurity();
+
+        String a = "Умеренный ущерб";
+
+        String b = "Низкий";
+
+        String c = "Низкий риск";
+
+        boolean expResult = true;
+
+        boolean result = false;
+
+        String x =Test.risk(a,b);
+
+        if (c==x) result=true;
+
+        assertEquals(expResult, result);
+
+    }
+
+
+    @Test
+
+    public void testTest4() {
+
+        RiskLevelOfInformationSecurity Test= new RiskLevelOfInformationSecurity();
+
+        String a = "Малый ущерб";
+
+        String b = "Очень высокий";
+
+        String c = "Средний риск";
+
+        boolean expResult = true;
+
+        boolean result = false;
+
+        String x =Test.risk(a,b);
+
+        if (c==x) result=true;
+
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+
+    public void testTest5() {
+
+        RiskLevelOfInformationSecurity Test= new RiskLevelOfInformationSecurity();
+
+        String a = "Умеренный ущерб";
+
+        String b = "Высокий";
+
+        String c = "Средний риск";
+
+        boolean expResult = true;
+
+        boolean result = false;
+
+        String x =Test.risk(a,b);
+
+        if (c==x) result=true;
+
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+
+    public void testTest6() {
+
+        RiskLevelOfInformationSecurity Test= new RiskLevelOfInformationSecurity();
+
+        String a = "Ущерб средней тяжести";
+
+        String b = "Низкий";
+
+        String c = "Средний риск";
+
+        boolean expResult = true;
+
+        boolean result = false;
+
+        String x =Test.risk(a,b);
+
+        if (c==x) result=true;
+
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+
+    public void testTest7() {
+
+        RiskLevelOfInformationSecurity Test= new RiskLevelOfInformationSecurity();
+
+        String a = "Ущерб средней тяжести";
+
+        String b = "Очень высокий";
+
+        String c = "Высокий риск";
+
+        boolean expResult = true;
+
+        boolean result = false;
+
+        String x =Test.risk(a,b);
+
+        if (c==x) result=true;
+
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+
+    public void testTest8() {
+
+        RiskLevelOfInformationSecurity Test= new RiskLevelOfInformationSecurity();
+
+        String a = "Большой ущерб";
+
+        String b = "Очень высокий";
+
+        String c = "Высокий риск";
+
+        boolean expResult = true;
+
+        boolean result = false;
+
+        String x =Test.risk(a,b);
+
+        if (c==x) result=true;
+
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+
+    public void testTest9() {
+
+        RiskLevelOfInformationSecurity Test= new RiskLevelOfInformationSecurity();
+
+        String a = "Критический ущерб";
+
+        String b = "Высокий";
+
+        String c = "Высокий риск";
+
+        boolean expResult = true;
+
+        boolean result = false;
+
+        String x =Test.risk(a,b);
+
+        if (c==x) result=true;
+
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+
+    public void testTestPustoe() {
+
+        RiskLevelOfInformationSecurity Test= new RiskLevelOfInformationSecurity();
+
+        String a = "";
+
+        String b = "";
+
+        String c = null;
+
+        boolean expResult = true;
+
+        boolean result = false;
+
+        String x =Test.risk(a,b);
+
+        if (c==x) result=true;
+
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+
+    public void testMain() {
+
+        String[] args = null;
+
+        Proekt Inter= new Proekt();
+
+        Inter.main(args);
+
+    }
+}
